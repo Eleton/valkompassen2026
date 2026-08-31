@@ -1,0 +1,58 @@
+export const partyData = [
+  {
+    fullName: "Socialdemokraterna",
+    name: "S",
+    description: "Ideologi är såklart viktigt, men självklart inte viktigare än makt! Vare sig du är knallröd reformist eller gråsossig Magdamorderat, det här är partiet för dig. Ingen förändring utlovas, men landet kommer i alla fall styras av folk som är vana att styra.",
+    value: 30.3,
+    color: "rgb(237, 27, 52)",
+  },
+  {
+    fullName: "Sverigedemokraterna",
+    name: "SD",
+    description: "Jimmie Åkesson, tja-la-la-la-laaaa~",
+    value: 18.8,
+    color: "rgb(251, 199, 0)",
+  },
+  {
+    fullName: "Moderaterna",
+    name: "M",
+    description: "Min dam eller min herre, och inget där emellan! Magnifikt roande att höra att du låter din röst erhållas av Det Moderata Samlingspartiet. Tack vare ditt mandat lovar vi att kämpa för mer vinst, mindre förlust, och för var människas rätt att undvika patrask.",
+    value: 17.7,
+    color: "rgb(82, 189, 236)",
+  },
+  {
+    fullName: "Vänsterpartiet",
+    name: "V",
+    description: "Vi vill sitta i regering och får vi inte det så kommer vi att hålla andan tills vi blir insläppta.",
+    value: 7.7,
+    color: "rgb(218, 41, 28)",
+  },
+  {
+    fullName: "Miljöpartiet",
+    name: "MP",
+    description: "Miljöpartiet tror på dig. Vi tror att du har det där extra engagemanget som krävs för att rädda klimatet. Att du orkar cykla dom där extra milen till jobbet. Att du kan klara dig igenom vintern med 14 grader hemma. Att du kan stå emot, och säga nej till den där flygresan till Barcelona, så att en rik affärsman från Kina kan ta den istället. Varje uppoffring räknas 🫶",
+    value: 7.3,
+    color: "rgb(83, 160, 69)",
+  },
+  {
+    fullName: "Centerpartiet",
+    name: "C",
+    description: "Jobben ska bli fler. Utsläppen ska ner. Sverige kan mer. Jobben ska bli fler. Utsläppen ska ner. Sverige kan mer. Jobben ska bli fler. Utsläppen ska ner. Sverige kan mer. Jobben ska bli fler. Utsläppen ska ner. Sverige kan mer. Jobben ska bli fler. Utsläppen ska ner. Sverige kan mer. Jobben ska bli fler. Utsläppen ska ner. Sverige kan mer. Jobben ska bli fler. Utsläppen ska ner. Sverige kan mer.",
+    value: 7.3,
+    color: "rgb(17, 72, 56)",
+  },
+  {
+    fullName: "Kristdemokraterna",
+    name: "KD",
+    description: "Sverigedemokraternas föredetta kvinnoförbund som nu även kan tänka sig att bli Socialdemokraternas stödstrumpa. För dig som både kan tänka dig en höger med hjärta, eller en vänster med en sviktande njure.",
+    value: 6.8,
+    color: "rgb(0, 94, 161)",
+  },
+  {
+    fullName: "Liberalerna",
+    name: "L",
+    description: "Oddsen att just du skulle rösta på Liberalerna är så astronomiskt låg att stjärnorna måste stå på linje just nu. Följ mitt råd: Köp en trisslott.",
+    value: 2.0,
+    color: "rgb(0, 106, 179)",
+  },
+];
