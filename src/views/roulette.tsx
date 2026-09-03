@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { Party } from "../types";
 import { Button } from "../components/button";
 
@@ -47,6 +47,7 @@ export const Roulette = ({
 }) => {
   const [count, setCount] = useState(0);
   const [clicked, setClicked] = useState(false);
+  const resolvedRef = useRef(false);
   const totalValue = parties.reduce((acc, party) => acc + party.value, 0);
   const tick = 360 / totalValue;
   console.log("totalValue", tick);
@@ -55,15 +56,28 @@ export const Roulette = ({
     const rounds = Math.floor(Math.random() * 5) + 8;
     const value = Math.floor(Math.random() * 360);
     const c = count + rounds * 360 + value;
+    resolvedRef.current = false;
     setCount(c);
     setClicked(true);
   };
 
-  const onTransitionEnd = () => {
+  const resolveSelection = () => {
+    if (resolvedRef.current) return;
+    resolvedRef.current = true;
     const finalAngle = count % 360;
     const party = getPartyAtAngle(parties, finalAngle, tick);
     setSelectedParty(parties.find((p) => p.name === party) || null);
   };
+
+  // iOS Safari can suspend a running CSS transition when the tab is
+  // backgrounded, in which case `transitionend` never fires. Fall back to a
+  // timer slightly longer than the 4s spin so the result still resolves.
+  useEffect(() => {
+    if (!clicked) return;
+    const timeout = setTimeout(resolveSelection, 4300);
+    return () => clearTimeout(timeout);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [clicked, count]);
 
   return (
     <>
@@ -76,7 +90,7 @@ export const Roulette = ({
                 <g
                   className="transition-transform duration-4000 transform-fill origin-center ease-in-out"
                   transform={`rotate(-${count})`}
-                  onTransitionEnd={onTransitionEnd}
+                  onTransitionEnd={resolveSelection}
                 >
                   {parties.map((party, index) => {
                     const startAngle =
