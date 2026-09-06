@@ -6,7 +6,6 @@ const RADIUS = 40;
 const ORIGO = { x: 50, y: 50 };
 
 const pieSlice = (startAngle: number, value: number) => {
-  console.log(value);
   const endAngle = startAngle + value * 3.6;
   const largeArcFlag = value > 50 ? 1 : 0;
 
@@ -22,7 +21,6 @@ const pieSlice = (startAngle: number, value: number) => {
 const getPartyAtAngle = (parties: Party[], angle: number, tick: number) => {
   let currentAngle = 0;
   for (const party of parties) {
-    console.log(currentAngle);
     const partyAngle = party.value * tick;
     if (angle >= currentAngle && angle < currentAngle + partyAngle) {
       return party.name;
@@ -50,9 +48,9 @@ export const Roulette = ({
   const resolvedRef = useRef(false);
   const totalValue = parties.reduce((acc, party) => acc + party.value, 0);
   const tick = 360 / totalValue;
-  console.log("totalValue", tick);
 
   const onClick = () => {
+    if (clicked) return;
     const rounds = Math.floor(Math.random() * 5) + 8;
     const value = Math.floor(Math.random() * 360);
     const c = count + rounds * 360 + value;
@@ -126,7 +124,10 @@ export const Roulette = ({
                   Ditt parti är: {selectedParty?.name}
                 </p>
               </div>
-              <div className="transition-opacity duration-1000" style={{ opacity: clicked ? 0 : 1 }}>
+              <div
+                className="transition-opacity duration-1000"
+                style={{ opacity: clicked ? 0 : 1, pointerEvents: clicked ? "none" : "auto" }}
+              >
                 <Button onClick={onClick}>Bestäm</Button>
               </div>
             </div>
@@ -137,23 +138,26 @@ export const Roulette = ({
               className="self-stretch flex flex-col transition-opacity"
               style={{
                 opacity: selectedParty ? 1 : 0,
+                pointerEvents: selectedParty ? "auto" : "none",
                 transitionDuration: selectedParty ? "1000ms" : "0ms",
-                transitionDelay: selectedParty ? "1500ms" : "0ms",
+                transitionDelay: selectedParty ? "1000ms" : "0ms",
               }}
             >
-              <Button onClick={onNext}>Den tar vi!</Button>
+              <Button onClick={() => selectedParty && onNext()}>Den tar vi!</Button>
             </div>
             {parties.length > 1 && (
               <div
                 className="self-stretch flex flex-col transition-opacity"
                 style={{
                   opacity: selectedParty ? 1 : 0,
+                  pointerEvents: selectedParty ? "auto" : "none",
                   transitionDuration: selectedParty ? "1000ms" : "0ms",
-                  transitionDelay: selectedParty ? "2500ms" : "0ms",
+                  transitionDelay: selectedParty ? "1500ms" : "0ms",
                 }}
               >
                 <Button
                   onClick={() => {
+                    if (!selectedParty) return;
                     setParties(parties.filter((p) => p.name !== selectedParty?.name));
                     setSelectedParty(null);
                     setClicked(false);
